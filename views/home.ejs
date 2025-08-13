@@ -2,8 +2,23 @@
 <html lang="en">
 <head>
     <style>
-        body{
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
         }
     </style>
     <meta charset="UTF-8">
@@ -13,42 +28,41 @@
 <body>
     <h1>URL Shortener</h1>
 
-<% if(locals.id){
-    %> <p>URL Generated: http://localhost:8001/url/<%= id %></p> 
-<%}%>
+    <% if (locals.id) { %>
+        <p>URL Generated: <a href="http://localhost:8001/<%= id %>" target="_blank">http://localhost:8001/<%= id %></a></p> 
+    <% } %>
 
     <div>
         <form method="post" action="/url">
-            <label>Enter Your Originl URL</label>
+            <label>Enter Your Original URL</label>
             <input type="text" name="url" placeholder="http://example.com">
             <button type="submit">Generate</button>
         </form>
     </div>
 
     <div>
-         <% if(locals.urls){%>
-          <table>
-            <thead>
-                <th>S. No</th>
-                <th>ShortID</th>
-                <th>Redirect</th>
-                <th>Clicks</th>
-            </thead>
-            <tbody>
-                <% urls.forEach(url,index) =>{
-                    %> 
+        <% if (locals.urls) { %>
+            <table>
+                <thead>
                     <tr>
-                    <td><%=index +1%></td>
-                    <td><%=url.shortId%></td>
-                    <td><%=url.redirectURL%></td>
-                    <td><%=url.visitHistory.length%></td>
+                        <th>S. No</th>
+                        <th>ShortID</th>
+                        <th>Redirect</th>
+                        <th>Clicks</th>
                     </tr>
-                    <%
-                })%>
-            </tbody>
-        </table>
-           
-        <% }%>  
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %> 
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= url.shortId %></td>
+                            <td><a href="/<%= url.shortId %>" target="_blank"><%= url.redirectURL %></a></td>
+                            <td><%= url.visitHistory.length %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>  
     </div>
 </body>
 </html>
