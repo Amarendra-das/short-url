@@ -20,7 +20,7 @@ app.use("/url",urlRoute);
 app.use("/",staticRoute);
 
 app.set("view engine","ejs");
-app.set("views", path.resolve("./views"))
+app.set("views", path.resolve("./views"));
 
 
 
@@ -37,4 +37,4 @@ app.get("/url/:shortId",async (req,res) =>{
     res.redirect(entry.redirectURL)
 });
 
-app.listen(PORT,()=>console.log(`Server stated at PORT ${PORT}`))
+app.listen(PORT,()=>console.log(`Server stated at PORT ${PORT}`));
