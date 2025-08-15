@@ -1,9 +1,10 @@
 const express = require("express")
 const path = require("path")
 const {connectToMongoDB} = require("./connect")
-const staticRoute =require("./routes/staticRouter")
 
+const staticRoute =require("./routes/staticRouter")
 const urlRoute = require('./routes/url');
+const userRoute =require('./routes/user')
 
 const URL = require("./models/url")
 
@@ -15,9 +16,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}))
 
 app.use("/url",urlRoute);
-
-
+app.use("/user",userRoute);
 app.use("/",staticRoute);
+
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
 
 app.set("view engine","ejs");
 app.set("views", path.resolve("./views"));
