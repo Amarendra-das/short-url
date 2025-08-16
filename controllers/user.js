@@ -24,9 +24,9 @@ async function handleUserLogin(req,res){
     return res.render("login",{
      error:"Invaild Username or Password",
 } )
-  const sessionId = uuidv4();
-  setUser(sessionId,user);
-  res.cookie("uid", sessionId, {
+  
+ const token= setUser(user);
+  res.cookie("uid",token , {
     httpOnly: true,        // prevents client-side JS access
     sameSite: "Lax",       // or "None" if cross-site
     secure: false          // true if using HTTPS
