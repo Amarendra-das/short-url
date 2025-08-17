@@ -26,15 +26,9 @@ async function handleUserLogin(req,res){
 } )
   
  const token= setUser(user);
-//   res.cookie("uid",token , {
+  res.cookie("token",token )
 
-//     httpOnly: true,        // prevents client-side JS access
-//     sameSite: "Lax",       // or "None" if cross-site
-//     secure: false          // true if using HTTPS
-// });
-
-
-    return res.json({token});
+    return res.redirect("/");
 }
 
 module.exports = {
