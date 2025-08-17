@@ -26,14 +26,15 @@ async function handleUserLogin(req,res){
 } )
   
  const token= setUser(user);
-  res.cookie("uid",token , {
-    httpOnly: true,        // prevents client-side JS access
-    sameSite: "Lax",       // or "None" if cross-site
-    secure: false          // true if using HTTPS
-});
+//   res.cookie("uid",token , {
+
+//     httpOnly: true,        // prevents client-side JS access
+//     sameSite: "Lax",       // or "None" if cross-site
+//     secure: false          // true if using HTTPS
+// });
 
 
-    return res.redirect("/");
+    return res.json({token});
 }
 
 module.exports = {
